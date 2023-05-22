@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    padding: 100;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #150050;
+    color: #ededed;
+}
+
+.header {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 5%;
+    border-bottom-left-radius: 80px;
+    border-bottom-right-radius: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+
+.logo {
+    position: relative;
+    font-size: 25px;
+    color: #ededed;
+    text-decoration: none;
+    font-weight: 600;
+
+}
+
+.Navbar a {
+    margin: 42px;
+    font-size: 18px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 400;
+    margin-left: 30px;
+    transition: .3 sec;
+
+}
+
+.map-container {
+    height: auto;
+    width: fit-content;
+}
+
+
+#map {
+    margin: auto;
+    position: absolute;
+    top: 55%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    transition: left 0.5s, top 0.5s;
+}
+
+svg {
+    fill: aquamarine;
+    stroke: black;
+    stroke-width: 1px;
+    cursor: pointer;
+}
+
+.cropinfo {
+    position: fixed;
+    top: 55%;
+    /* left: 80%; */
+    right: -400px;
+    /* transform: translate(-50%, -50%); */
+    transform: translateY(-50%);
+    width: 600px;
+    height: 650px;
+    background-color: cornflowerblue;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.5s, right 0.5s;
+    overflow: hidden;
+}
+
+
+.cropinfo.show {
+    opacity: 1;
+    right: 40px;
+}
+
+.cropinfo .content {
+    width: 97%;
+    height: 87%;
+    font-size: 20px;
+    margin-top: 50px;
+    margin-left: 10px;
+    margin-bottom: 30px;
+    margin-right: 10px;
+    overflow: auto;
+}
+
+.cropinfo .close {
+    size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.cropinfo .buttons {
+    margin: 2px;
+    display: flex;
+    max-width: 300px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 400;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+
+.cultivation {
+    position: fixed;
+    top: 55%;
+    /* left: 80%; */
+    right: -400px;
+    /* transform: translate(-50%, -50%); */
+    transform: translateY(-50%);
+    width: 600px;
+    height: 650px;
+    background-color: cornflowerblue;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.5s, right 0.5s;
+    overflow: hidden;
+}
+
+
+.cultivation.show {
+    opacity: 1;
+    right: 40px;
+}
+
+.cultivation .content {
+    width: 97%;
+    height: 87%;
+    font-size: 20px;
+    margin-top: 50px;
+    margin-left: 10px;
+    margin-bottom: 30px;
+    margin-right: 10px;
+    overflow: auto;
+}
+
+.cultivation .close {
+    size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.cultivation .buttons {
+    margin: 2px;
+    display: flex;
+    max-width: 300px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 400;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+
+.warnings {
+    position: fixed;
+    top: 55%;
+    /* left: 80%; */
+    right: -400px;
+    /* transform: translate(-50%, -50%); */
+    transform: translateY(-50%);
+    width: 600px;
+    height: 650px;
+    background-color: cornflowerblue;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.5s, right 0.5s;
+    overflow: hidden;
+}
+
+
+.warnings.show {
+    opacity: 1;
+    right: 40px;
+}
+
+.warnings .content {
+    width: 97%;
+    height: 87%;
+    font-size: 20px;
+    margin-top: 50px;
+    margin-left: 10px;
+    margin-bottom: 30px;
+    margin-right: 10px;
+    overflow: auto;
+}
+
+.warnings .close {
+    size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.warnings .buttons {
+    margin: 2px;
+    display: flex;
+    max-width: 300px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 400;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.cropinfo .buttons .link {
+    background-color: #150050;
+    padding: 5px 3%;
+    cursor: pointer;
+    border-radius: 10px;
+}
