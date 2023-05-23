@@ -1,71 +1,63 @@
-// //Accessing Location
-// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+//Accessing Location
+const getLocation = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  } else {
+    alert("Geolocation is not supported by this browser.");
+  }
+};
 
-// function getCityName() {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(getLocationDetails, showError);
-//   } else {
-//     alert("Geolocation is not supported by this browser.");
-//   }
-// }
+const showPosition = (position) => {
+  let lat = position.coords.latitude;
+  let long = position.coords.longitude;
+  const apiKey = 'a6527fc7daab4364ad513180d3434232';
+  const url = `https://api.ipgeolocation.io/geolocation/reverse?apiKey=${apiKey}&lat=${lat}&long=${long}`;
 
-// function getLocationDetails(position) {
-//   var latitude = position.coords.latitude;
-//   var longitude = position.coords.longitude;
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if (data.city && data.country_name) {
+        let city = data.city;
+        let country = data.country_name;
+        const locationDetails = document.getElementById("locationdetails");
+        locationDetails.innerHTML = `City: ${city}<br>Country: ${country}`;
+      } else {
+        alert("Location not found.");
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+};
 
-//   var geocoder = new google.maps.Geocoder();
-//   var latlng = new google.maps.LatLng(latitude, longitude);
+const showError = (error) => {
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      alert("User denied the request for Geolocation.");
+      break;
 
-//   geocoder.geocode({ 'latLng': latlng }, function(results, status) {
-//     if (status == google.maps.GeocoderStatus.OK) {
-//       if (results[0]) {
-//         var city = null;
+    case error.POSITION_UNAVAILABLE:
+      alert("Location information is unavailable.");
+      break;
 
-//         // Loop through the address components
-//         for (var i = 0; i < results[0].address_components.length; i++) {
-//           var component = results[0].address_components[i];
+    case error.TIMEOUT:
+      alert("The request to get user location timed out.");
+      break;
 
-//           // Check if the component type is 'locality' (city)
-//           if (component.types.includes('locality')) {
-//             city = component.long_name;
-//             break;
-//           }
-//         }
+    case error.UNKNOWN_ERROR:
+      alert("An unknown error occurred.");
+      break;
 
-//         if (city) {
-//           // Display the city name on the webpage
-//           document.getElementById('city').innerHTML = "City: " + city;
-//         } else {
-//           alert("City name not found.");
-//         }
-//       } else {
-//         alert("No results found.");
-//       }
-//     } else {
-//       alert("Geocoder failed due to: " + status);
-//     }
-//   });
-// }
+    default:
+      alert("An unknown error occurred.");
+  }
+};
 
-// function showError(error) {
-//   switch(error.code) {
-//     case error.PERMISSION_DENIED:
-//       alert("User denied the request for Geolocation.");
-//       break;
-//     case error.POSITION_UNAVAILABLE:
-//       alert("Location information is unavailable.");
-//       break;
-//     case error.TIMEOUT:
-//       alert("The request to get user location timed out.");
-//       break;
-//     case error.UNKNOWN_ERROR:
-//       alert("An unknown error occurred.");
-//       break;
-//   }
-// }
-
-
-
+// Example usage
+const getLocationButton = document.getElementById("get-location");
+if (getLocationButton) {
+  getLocationButton.addEventListener("click", getLocation);
+}
 
 //Sliding Map
 function moveToCenter1() {
@@ -73,7 +65,6 @@ function moveToCenter1() {
   map.style.top = "55%";
   map.style.left = "30%";
   var popup = document.getElementById("cropinfo");
-  // popup.style.display = "block";
   popup.classList.add("show");
 }
 function moveToCenter2() {
@@ -81,7 +72,6 @@ function moveToCenter2() {
   map.style.top = "55%";
   map.style.left = "30%";
   var popup = document.getElementById("cultivationinfo");
-  // popup.style.display = "block";
   popup.classList.add("show");
 }
 function moveToCenter3() {
@@ -89,34 +79,48 @@ function moveToCenter3() {
   map.style.top = "55%";
   map.style.left = "30%";
   var popup = document.getElementById("warningsinfo");
-  // popup.style.display = "block";
+  popup.classList.add("show");
+}
+function moveToCenter4() {
+  var map = document.getElementById("map");
+  map.style.top = "55%";
+  map.style.left = "30%";
+  var popup = document.getElementById("locationcontainer");
   popup.classList.add("show");
 }
 
-function hidePopup1() {
+function hidePopup4() {
   var popup = document.getElementById("cropinfo");
-  // popup.style.display = "none";
   popup.classList.remove("show");
+  var popup1 = document.getElementById("cultivationinfo");
+  popup1.classList.remove("show");
+  var popup2 = document.getElementById("warningsinfo");
+  popup2.classList.remove("show");
+  var popup2 = document.getElementById("locationcontainer");
+  popup2.classList.remove("show");
   var map = document.getElementById("map");
   map.style.top = "55%";
   map.style.left = "55%";
+}
+function hidePopup1() {
+  var popup1 = document.getElementById("cultivationinfo");
+  popup1.classList.remove("show");
+  var popup2 = document.getElementById("warningsinfo");
+  popup2.classList.remove("show");
 }
 function hidePopup2() {
-  var popup = document.getElementById("cultivationinfo");
-  // popup.style.display = "none";
+  var popup = document.getElementById("cropinfo");
   popup.classList.remove("show");
-  var map = document.getElementById("map");
-  map.style.top = "55%";
-  map.style.left = "55%";
+  var popup2 = document.getElementById("warningsinfo");
+  popup2.classList.remove("show");
 }
 function hidePopup3() {
-  var popup = document.getElementById("warningsinfo");
-  // popup.style.display = "none";
+  var popup = document.getElementById("cropinfo");
   popup.classList.remove("show");
-  var map = document.getElementById("map");
-  map.style.top = "55%";
-  map.style.left = "55%";
+  var popup1 = document.getElementById("cultivationinfo");
+  popup1.classList.remove("show");
 }
+
 
 var links = document.querySelectorAll('.link');
 

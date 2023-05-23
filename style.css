@@ -12,7 +12,7 @@ html {
 }
 
 body {
-    background: #150050;
+    background: #0076ec;
     color: #ededed;
 }
 
@@ -74,15 +74,65 @@ svg {
     cursor: pointer;
 }
 
+.sidemenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 600px;
+    max-width: 600px;
+    right: -1000px;
+    top: 80%;
+    background-color: #ffffff;
+    padding: 18px;
+    position: fixed;
+    transform: translateY(-50%);
+    border-radius: 0.6em;
+    box-shadow: 0 0.6em 2.5em rgba(0, 7, 70, 0.2);
+    opacity: 0;
+    transition: opacity 0.5s, right 0.8s;
+}
+
+.container.show {
+    right: 40px;
+    opacity: 1;
+}
+
+.container img {
+    width: 4em;
+    display: block;
+    margin: auto;
+}
+
+#location-details {
+    font-size: 20px;
+    text-align: center;
+    margin: 1em 0 1.7em 0;
+    color: #021d38;
+    font-weight: 500;
+}
+
+.container button {
+    display: block;
+    margin: auto;
+    background-color: #42a1ff;
+    color: #ffffff;
+    border: none;
+    font-size: 18pxem;
+    padding: 18px;
+    border-radius: 0.25em;
+    cursor: pointer;
+}
+
 .cropinfo {
     position: fixed;
-    top: 55%;
-    /* left: 80%; */
-    right: -400px;
-    /* transform: translate(-50%, -50%); */
+    top: 37%;
+    right: -600px;
     transform: translateY(-50%);
     width: 600px;
-    height: 650px;
+    height: 425px;
     background-color: cornflowerblue;
     border-radius: 10px;
     opacity: 0;
@@ -132,13 +182,11 @@ svg {
 
 .cultivation {
     position: fixed;
-    top: 55%;
-    /* left: 80%; */
-    right: -400px;
-    /* transform: translate(-50%, -50%); */
+    top: 37%;
+    right: -600px;
     transform: translateY(-50%);
     width: 600px;
-    height: 650px;
+    height: 425px;
     background-color: cornflowerblue;
     border-radius: 10px;
     opacity: 0;
@@ -188,13 +236,11 @@ svg {
 
 .warnings {
     position: fixed;
-    top: 55%;
-    /* left: 80%; */
-    right: -400px;
-    /* transform: translate(-50%, -50%); */
+    top: 37%;
+    right: -600px;
     transform: translateY(-50%);
     width: 600px;
-    height: 650px;
+    height: 425px;
     background-color: cornflowerblue;
     border-radius: 10px;
     opacity: 0;
@@ -239,11 +285,4 @@ svg {
     font-weight: 400;
     margin-left: 5px;
     cursor: pointer;
-}
-
-.cropinfo .buttons .link {
-    background-color: #150050;
-    padding: 5px 3%;
-    cursor: pointer;
-    border-radius: 10px;
 }
