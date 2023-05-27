@@ -1,4 +1,6 @@
+document.addEventListener("DOMContentLoaded", function() {
 //Accessing Location
+
 const getLocation = () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -10,17 +12,22 @@ const getLocation = () => {
 const showPosition = (position) => {
   let lat = position.coords.latitude;
   let long = position.coords.longitude;
-  const apiKey = 'a6527fc7daab4364ad513180d3434232';
-  const url = `https://api.ipgeolocation.io/geolocation/reverse?apiKey=${apiKey}&lat=${lat}&long=${long}`;
+
+  const apiKey = 'a105c052ade302bcdf880bc1f58d5ede';
+  const url = `http://api.positionstack.com/v1/reverse?access_key=${apiKey}&query=${lat},${long}`;
 
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      if (data.city && data.country_name) {
-        let city = data.city;
-        let country = data.country_name;
-        const locationDetails = document.getElementById("locationdetails");
-        locationDetails.innerHTML = `City: ${city}<br>Country: ${country}`;
+      if (data.data.length > 0) {
+        let name = data.data[0].name;
+        let county = data.data[0].county;
+        let region = data.data[0].region;
+        let country = data.data[0].country;
+        const locationButton = document.getElementById("getlocationbutton");
+        locationButton.innerText = `${name}, ${county}, ${region}, ${country}`;
+
+      
       } else {
         alert("Location not found.");
       }
@@ -53,11 +60,19 @@ const showError = (error) => {
   }
 };
 
-// Example usage
-const getLocationButton = document.getElementById("get-location");
+const getLocationButton = document.getElementById("getlocationbutton");
 if (getLocationButton) {
   getLocationButton.addEventListener("click", getLocation);
 }
+
+});
+
+
+
+
+
+
+
 
 //Sliding Map
 function moveToCenter1() {

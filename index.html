@@ -15,10 +15,10 @@
     <header class="header">
         <a href="#" class="logo">Agriculture Assistance</a>
         <nav class="Navbar">
-            <a href="#home" class="active" onclick="hidePopup4()">Map</a>
-            <a href="#crop-info" onclick="moveToCenter1(), hidePopup1(), moveToCenter4()">Crops</a>
-            <a href="#skills" onclick="moveToCenter2(), hidePopup2(), moveToCenter4()">Cultivation</a>
-            <a href="#contact" onclick="moveToCenter3(), hidePopup3(), moveToCenter4()">Warnings</a>
+            <a href="#" class="active" onclick="hidePopup4()">Map</a>
+            <a href="#" onclick="moveToCenter1(), hidePopup1(), moveToCenter4()">Crops</a>
+            <a href="#" onclick="moveToCenter2(), hidePopup2(), moveToCenter4()">Cultivation</a>
+            <a href="#" id="weatherwarningdetails" onclick="moveToCenter3(), hidePopup3(), moveToCenter4()">Warnings</a>
         </nav>
     </header>
 
@@ -326,7 +326,7 @@
                 <div id="location-details">Click on the 'Get Location' Button
                     <p id="Locationdetails"> </p>
                 </div>
-                <button id="get-location" onclick="getLocation()">Get Location</button>
+                <button id="getlocationbutton">Get Location</button> 
             </div>
         </div>
 
