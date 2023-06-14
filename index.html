@@ -8,9 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agricultural Assistance</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
 </head>
 
 <body>
+
     <header class="header" id="header">
         <a href="#" class="logo">Agriculture Assistance</a>
         <nav class="Navbar">
@@ -328,6 +330,10 @@
     <section class="warnings" id="warnings">
         <div class="card">
             <h1>Weather Forecast & Warnings</h1>
+
+            <div class="loading">
+                <div class="spinner"></div>
+            </div>
             <div class="search" id="search">
                 <input type="text" placeholder="Enter city name" spellcheck="false" name="searchbox">
                 <button id="searchbutton"><img src="images/search.png"></button>
@@ -356,9 +362,43 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
+            <div class="dailyforecast">
+                <h3 class="">Daily Forecast</h3>
+                <div class="days">
+                    <div class = "col" id="day1">
+                        <p class="daychange">Sunday</p>
+                        <img src="images/rain.png" class="dailyicon1" id="dayicon1">
+                        <p class="minValues" id="day1Min">Loading...</p>
+                        <p class="maxValues" id="day1Max">Loading...</p>
+                    </div>
+                    <div class = "col" id="day2">
+                        <p class="daychange">Sunday</p>
+                        <img src="images/rain.png" class="dailyicon2" id="dayicon2">
+                        <p class="minValues" id="day2Min">Loading...</p>
+                        <p class="maxValues" id="day2Max">Loading...</p>
+                    </div>
+                    <div class = "col" id="day3">
+                        <p class="daychange">Sunday</p>
+                        <img src="images/rain.png" class="dailyicon3" id="dayicon3">
+                        <p class="minValues" id="day3Min">Loading...</p>
+                        <p class="maxValues" id="day3Max">Loading...</p>
+                    </div>
+                    <div class = "col" id="day4">
+                        <p class="daychange">Sunday</p>
+                        <img src="images/rain.png" class="dailyicon4" id="dayicon4">
+                        <p class="minValues" id="day4Min">Loading...</p>
+                        <p class="maxValues" id="day4Max">Loading...</p>
+                    </div>
+                    <div class = "col" id="day5">
+                        <p class="daychange">Sunday</p>
+                        <img src="images/rain.png" class="dailyicon5" id="dayicon5">
+                        <p class="minValues" id="day5Min">Loading...</p>
+                        <p class="maxValues" id="day5Max">Loading...</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        
     </section>
 
 
