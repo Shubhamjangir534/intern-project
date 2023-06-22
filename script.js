@@ -1,4 +1,73 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+  //menu icon toggle
+  let menuIcon = document.querySelector('#menu-icon');
+  let navbar = document.querySelector('.Navbar');
+
+  menuIcon.onclick = () => {
+    menuIcon.classList.toggle('bx-x');
+    navbar.classList.toggle('active');
+  }
+
+  let sections = document.querySelectorAll('section');
+  let navLinks = document.querySelectorAll('header nav a');
+
+  window.onscroll = () => {
+    sections.forEach(sec => {
+      let top = window.scrollY;
+      let offset = sec.offsetTop - 80;
+      let height = sec.offsetHeight;
+      let id = sec.getAttribute('id');
+
+      if (top >= offset && top < offset + height) {
+        navLinks.forEach(links => {
+          links.classList.remove('active');
+          document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
+        })
+      }
+    });
+
+
+    //Sticky Header
+    let header = document.querySelector('header')
+
+    header.classList.toggle('sticky', window.scrollY > 100);
+
+    //remove
+    menuIcon.classList.remove('bx-x');
+    navbar.classList.remove('active');
+  }
+
+  //Function to make appear Crops Section
+  function scrollToSection() {
+    const section = document.getElementById("crops");
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+  
+  function showcropsection() {
+    const cropSection = document.getElementById("crops");
+    cropSection.classList.add('active');
+    showstatecrop();
+  }
+
+  function showstatecrop(){
+    const statecrop = document
+  }
+
+
+  const cropclick = document.getElementById("map");
+  cropclick.addEventListener("click", () => {
+    showcropsection();
+    scrollToSection();
+  });
+
+
+
+
+
+
+
+
   //Accessing Location
   const loadingScreen = document.querySelector(".loading");
 
@@ -123,77 +192,20 @@ document.addEventListener("DOMContentLoaded", function () {
       hideLoadingScreen();
     }
   }
-  /*async function geocode(city) {
+
+
+
+
+  // Function to get weather description for today and next four days
+  async function getWeatherDescription(city) {
     const apiKey = "649ec0197bbede5ec5e68ec5a3e659a0";
-    const apiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`;
-  
-    try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-  
-      if (data.length > 0) {
-        const { lat, lon } = data[0];
-        dailyforecast(lat, lon);
-      } else {
-        console.log(`City not found: ${city}`);
-      }
-    } catch (error) {
-      console.log("An error occurred:", error);
-    }
-  }
-  
-  async function dailyforecast(latitude, longitude) {
-    const apiUrl = `http://api.weatherunlocked.com/api/forecast/${latitude},${longitude}?app_id=dc105edf&app_key=9c8170ae2eea4e90dde9b56a75c78263`;
-  
-    const response = await fetch(apiUrl);
-    const data = await response.json();
+    const apiUrl1 = "https://api.openweathermap.org/data/2.5/forecast";
+    const url = `${apiUrl1}?q=${city},IN&appid=${apiKey}`;
 
-    if (response.ok) {
-      if (data.cod === "404" || data.message === "city not found") {
-        document.querySelector(".error").style.display = "block";
-        document.querySelector(".weather").style.display = "none";
-        document.querySelector(".dailyforecast").style.display = "none";
-        hideLoadingScreen();
-      } else {
-        for (let i = 0; i < data.Days.length; i++) {
-          
-        document.querySelector(".date").innerHTML = data.Days[i];
-        document.querySelector(".temperature").innerHTML = Math.round(day.Timeframes[0].temp_c) + "°C";
-        geocode();
-        if (data.weather[0].main === "Clouds") {
-          weathericon.src = "images/clouds.png";
-        } else if (data.weather[0].main === "Clear") {
-          weathericon.src = "images/clear.png";
-        } else if (data.weather[0].main === "Rain") {
-          weathericon.src = "images/rain.png";
-        } else if (data.weather[0].main === "Drizzle") {
-          weathericon.src = "images/drizzle.png";
-        } else if (data.weather[0].main === "Mist") {
-          weathericon.src = "images/mist.png";
-        }
-
-        document.querySelector(".weather").style.display = "contents";
-        document.querySelector(".dailyforecast").style.display = "contents";
-        document.querySelector(".error").style.display = "none";
-        hideLoadingScreen();
-        }
-      }
-    }
-    else {
-      document.querySelector(".error").style.display = "block";
-      document.querySelector(".weather").style.display = "none";
-      document.querySelector(".dailyforecast").style.display = "none";
-      hideLoadingScreen();
-    }
-  }*/
-  async function GetInfo(city) {
-    const apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=";
-    const apikey = "649ec0197bbede5ec5e68ec5a3e659a0";
-  
     try {
-      const response = await fetch(apiUrl + city + `&appid=${apikey}`);
+      const response = await fetch(url);
       const data = await response.json();
-  
+
       if (response.ok) {
         if (data.cod === "404" || data.message === "city not found") {
           document.querySelector(".error").style.display = "block";
@@ -201,19 +213,52 @@ document.addEventListener("DOMContentLoaded", function () {
           document.querySelector(".dailyforecast").style.display = "none";
           hideLoadingScreen();
         } else {
+          for (let i = 0; i < 5; i++) {
+            document.getElementById("description" + (i + 1)).innerHTML =
+              "Description: " + data.list[i].weather[0].description + ".";
+          }
+        }
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Please enter any Indian City name.");
+    }
+  }
+
+
+  async function GetInfo(city) {
+    const apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=";
+    const apikey = "649ec0197bbede5ec5e68ec5a3e659a0";
+
+    try {
+      const response = await fetch(apiUrl + city + `&appid=${apikey}`);
+      const data = await response.json();
+
+      if (response.ok) {
+        if (data.cod === "404" || data.message === "city not found") {
+          document.querySelector(".error").style.display = "block";
+          document.querySelector(".weather").style.display = "none";
+          document.querySelector(".dailyforecast").style.display = "none";
+          hideLoadingScreen();
+        } else {
+          getWeatherDescription();
           for (i = 0; i < 5; i++) {
             document.getElementById("day" + (i + 1) + "Min").innerHTML =
               "Min: " + Number(data.list[i].main.temp_min - 273.15).toFixed(1) + "°C";
-          }
-  
-          for (i = 0; i < 5; i++) {
+
             document.getElementById("day" + (i + 1) + "Max").innerHTML =
               "Max: " + Number(data.list[i].main.temp_max - 273.15).toFixed(2) + "°C";
-          }
-          for (let i = 0; i < 5; i++) {
+
+            document.getElementById("wind" + (i + 1)).innerHTML =
+              "Wind: " + data.list[i].wind.speed + " Km/h";
+            document.getElementById("day" + (i + 1) + "humidity").innerHTML =
+              "Humidity: " + data.list[i].main.humidity + "%";
+
             const weatherCondition = data.list[i].weather[0].main;
-            const dayIcon = document.getElementById("dayicon" + (i+1));
-          
+            const dayIcon = document.getElementById("dayicon" + (i + 1));
+
             if (weatherCondition === "Clouds") {
               dayIcon.src = "images/clouds.png";
             } else if (weatherCondition === "Clear") {
@@ -224,7 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
               dayIcon.src = "images/drizzle.png";
             } else if (weatherCondition === "Mist") {
               dayIcon.src = "images/mist.png";
-            } 
+            }
           }
           updateDayChange();
           document.querySelector(".weather").style.display = "contents";
@@ -243,25 +288,30 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("Something Went Wrong: Try Checking Your Internet Connection");
     }
   }
-  
-//Getting and displaying the text for the upcoming five days of the week
-function updateDayChange() {
-  var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  var today = new Date().getDay(); // Get the current day of the week (0-6)
 
-  // Update the daychange class innerText for each day
-  for (var i = 1; i <= 5; i++) {
-    var dayElement = document.querySelector('#day' + i + ' .daychange');
-    var dayIndex = (today + i) % 7; // Calculate the index of the next day
+  //Getting and displaying the text for the upcoming five days of the week
+  function updateDayChange() {
+    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var today = new Date().getDay(); // Get the current day of the week (0-6)
 
-    dayElement.innerText = days[dayIndex];
+    // Update the daychange class innerText for each day
+    for (var i = 1; i <= 5; i++) {
+      var dayElement = document.querySelector('#day' + i + ' .daychange');
+      var dayIndex = (today + i) % 7; // Calculate the index of the next day
+
+      dayElement.innerText = days[dayIndex];
+    }
   }
-}
 
-  
+
 
   searchbtn.addEventListener("click", () => {
     checkweather(searchbox.value);
+  });
+  searchbox.addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
+      checkweather(searchbox.value);
+    }
   });
   getlocationbutton.addEventListener("click", getLocation);
 
