@@ -61,10 +61,31 @@ document.addEventListener("DOMContentLoaded", function () {
     scrollToSection();
   });
 
-
-
-
-
+  function showinfo(event) {
+    const button = event.currentTarget;
+    const crop = button.closest(".cropname");
+    const info = crop.querySelector(".infocrop");
+    const buttonIcon = button.querySelector("i");
+  
+    if (info.style.opacity === "0") {
+      info.style.transition = "opacity 0.5s, height 0.5s";
+      info.style.opacity = "1";
+      info.style.height = "auto";
+      buttonIcon.classList.remove("bxs-down-arrow");
+      buttonIcon.classList.add("bxs-up-arrow");
+    } else {
+      info.style.transition = "opacity 0.5s, height 0.5s";
+      info.style.opacity = "0";
+      info.style.height = "0";
+      buttonIcon.classList.remove("bxs-up-arrow");
+      buttonIcon.classList.add("bxs-down-arrow");
+    }
+  }
+  
+  const buttons = document.querySelectorAll(".dropdownbutton");
+  buttons.forEach((button) => {
+    button.addEventListener("click", showinfo);
+  });
 
 
 
