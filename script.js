@@ -1,4 +1,56 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
+  var section = document.querySelector(".home");
+  var sectionTop = section.offsetTop;
+  var triggerPoint = window.innerHeight * 0.8;
+
+  var animationTimeout;
+
+  document.addEventListener("scroll", function() {
+      if (window.pageYOffset > sectionTop - triggerPoint) {
+          if (!animationTimeout) {
+              animationTimeout = setTimeout(function() {
+                  section.classList.add("animate");
+                  clearTimeout(animationTimeout);
+              }, 500); // 1 second delay
+          }
+      } else {
+          clearTimeout(animationTimeout);
+          animationTimeout = null;
+      }
+  });
+});
+
+
+
+const parallax_el = document.querySelectorAll(".parallax");
+
+let xValue = 0;
+let yValue = 0;
+
+window.addEventListener("DOMContentLoaded", () => {
+  parallax_el.forEach((el) => {
+    el.style.transform = "translateX(-50%) translateY(-50%)";
+  });
+});
+
+window.addEventListener("mousemove", (e) => {
+  xValue = e.clientX - window.innerWidth / 2;
+  yValue = e.clientY - window.innerHeight / 2;
+
+  parallax_el.forEach((el) => {
+    let speedx = el.dataset.speedx;
+    let speedy = el.dataset.speedy;
+    el.style.transform = `translateX(calc(-50% + ${-xValue * speedx}px)) translateY(calc(-50% + ${yValue * speedy}px))`;
+  });
+});
+
+
+
+
+    const mainElement = document.querySelector("main");
+    mainElement.classList.add("zoom-effect");
+
+
 
   //menu icon toggle
   let menuIcon = document.querySelector('#menu-icon');
@@ -38,21 +90,172 @@ document.addEventListener("DOMContentLoaded", function () {
     navbar.classList.remove('active');
   }
 
-  //Function to make appear Crops Section
-  function scrollToSection() {
-    const section = document.getElementById("crops");
-    section.scrollIntoView({ behavior: 'smooth' });
-  }
-  
-  function showcropsection() {
-    const cropSection = document.getElementById("crops");
-    cropSection.classList.add('active');
-    showstatecrop();
-  }
+  //Function to scroll to crop section
+  const stateElements = document.querySelectorAll('#map path');
 
-  function showstatecrop(){
-    const statecrop = document
-  }
+  stateElements.forEach((stateElement) => {
+    stateElement.addEventListener('click', (event) => {
+      event.preventDefault();
+  
+      const stateId = stateElement.parentNode.getAttribute('id');
+      setTimeout(() => {
+        const cropsSection = document.getElementById('crops');
+        cropsSection.scrollIntoView({ behavior: 'smooth' });
+      }, 500);
+      if (stateId === 'IN-AP') {
+        const assamCard = document.getElementById('AndhraPradesh');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = assamCard.offsetLeft;
+      } else if (stateId === 'IN-AR') {
+        const biharCard = document.getElementById('ArunachalPradesh');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = biharCard.offsetLeft;
+      } else if (stateId === 'IN-RJ') {
+        const rajasthanCard = document.getElementById('Rajasthan');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      } else if (stateId === 'IN-PB') {
+        const rajasthanCard = document.getElementById('Punjab');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      } else if (stateId === 'IN-OR') {
+        const rajasthanCard = document.getElementById('Odisha');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-NL') {
+        const rajasthanCard = document.getElementById('Nagaland');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-MZ') {
+        const rajasthanCard = document.getElementById('Mizoram');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-MP') {
+        const rajasthanCard = document.getElementById('MadhyaPradesh');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-MN') {
+        const rajasthanCard = document.getElementById('Manipur');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-ML') {
+        const rajasthanCard = document.getElementById('Meghalaya');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-MH') {
+        const rajasthanCard = document.getElementById('Maharashtra');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-SK') {
+        const rajasthanCard = document.getElementById('Sikkim');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-TG') {
+        const rajasthanCard = document.getElementById('Telangana');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-TN') {
+        const rajasthanCard = document.getElementById('TamilNadu');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-TR') {
+        const rajasthanCard = document.getElementById('Tripura');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-KL') {
+        const rajasthanCard = document.getElementById('Kerala');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-KA') {
+        const rajasthanCard = document.getElementById('Karnataka');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-JK') {
+        const rajasthanCard = document.getElementById('JammuAndKashmir');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-JH') {
+        const rajasthanCard = document.getElementById('Jharkhand');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-UP') {
+        const rajasthanCard = document.getElementById('UttarPradesh');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-UT') {
+        const rajasthanCard = document.getElementById('Uttarakhand');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-WB') {
+        const rajasthanCard = document.getElementById('WestBengal');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-HR') {
+        const rajasthanCard = document.getElementById('Haryana');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-HP') {
+        const rajasthanCard = document.getElementById('HimachalPradesh');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-GJ') {
+        const rajasthanCard = document.getElementById('Gujarat');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-GA') {
+        const rajasthanCard = document.getElementById('Goa');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-DL') {
+        const rajasthanCard = document.getElementById('Delhi');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-CT') {
+        const rajasthanCard = document.getElementById('Chhattisgarh');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-BR') {
+        const rajasthanCard = document.getElementById('Bihar');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+       else if (stateId === 'IN-AS') {
+        const rajasthanCard = document.getElementById('Assam');
+        const cardContainer = document.getElementById('crops');
+        cardContainer.scrollLeft = rajasthanCard.offsetLeft;
+      }
+    });
+  });
+  
+  
+  
+  
+  
+
 
 
   const cropclick = document.getElementById("map");
@@ -67,22 +270,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const info = crop.querySelector(".infocrop");
     const buttonIcon = button.querySelector("i");
   
-    if (info.style.opacity === "0") {
-      info.style.transition = "opacity 0.5s, height 0.5s";
-      info.style.opacity = "1";
-      info.style.height = "auto";
+    if (info.style.display === "none") {
+      info.style.display = "block";
       buttonIcon.classList.remove("bxs-down-arrow");
       buttonIcon.classList.add("bxs-up-arrow");
     } else {
-      info.style.transition = "opacity 0.5s, height 0.5s";
-      info.style.opacity = "0";
-      info.style.height = "0";
+      info.style.display = "none";
       buttonIcon.classList.remove("bxs-up-arrow");
       buttonIcon.classList.add("bxs-down-arrow");
     }
   }
   
-  const buttons = document.querySelectorAll(".dropdownbutton");
+  const buttons = document.querySelectorAll(".cropname .dropdownbutton");
   buttons.forEach((button) => {
     button.addEventListener("click", showinfo);
   });
@@ -338,4 +537,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
   checkweather();
 
-})
